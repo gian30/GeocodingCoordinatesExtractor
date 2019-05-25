@@ -8,6 +8,8 @@ package geocoding;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.AdjustmentEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -359,6 +361,10 @@ public final class GetCoordinates extends javax.swing.JFrame {
         setTableVisible(table, true);
         setCursor(new Cursor(WAIT_CURSOR));
         table.setModel(modelo);
+//        jScrollPane1.getVerticalScrollBar().addAdjustmentListener((AdjustmentEvent e) -> {
+//            e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+//        });
+
         FileInputStream fileInputStream = new FileInputStream(path);
         try {
             toRun = true;
@@ -378,19 +384,25 @@ public final class GetCoordinates extends javax.swing.JFrame {
             OUTER:
             for (int i = rowTotal; i >= 0; i--) {
                 if (toRun == true) {
+
                     DataFormatter formatter = new DataFormatter();
                     percent++;
+
                     if (worksheet.getRow(i) != null) {
                         XSSFRow row = worksheet.getRow(i);
                         cellTotal = row.getLastCellNum();
+
                         address = "";
+
                         for (int x = 0; x < cellTotal; x++) {
+
                             XSSFCell cell = row.getCell((short) x);
                             if (address.equals("")) {
                                 address = formatter.formatCellValue(cell);
                             } else {
                                 address = address + ", " + formatter.formatCellValue(cell);
                             }
+
                         }
                         int intIndex = 0;
                         String oldAdress = address;
@@ -478,14 +490,20 @@ public final class GetCoordinates extends javax.swing.JFrame {
                     jButton5.setEnabled(false);
                     i = -2;
                 }
+
             }
+
             enableButtons(true);
+
             setCursor(new Cursor(DEFAULT_CURSOR));
             if (error == false && toRun == true) {
                 JOptionPane.showMessageDialog(GetCoordinates.this, "Las direcciones se han procesado correctamente!", "", JOptionPane.INFORMATION_MESSAGE);
             }
+
         } catch (Exception e) {
+
             JOptionPane.showMessageDialog(GetCoordinates.this, "Error: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+
             enableButtons(true);
             setCursor(new Cursor(DEFAULT_CURSOR));
         }
@@ -516,9 +534,11 @@ public final class GetCoordinates extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(GetCoordinates.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
         toRun = false;
         jButton5.setEnabled(false);
         jRadioButton1.setEnabled(true);
