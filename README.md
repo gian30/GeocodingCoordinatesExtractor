@@ -2,6 +2,9 @@
 
 An application that extracts coordinates from the directions by reading Excel files.
 
+## Download app
+https://www.gianlucalv.com/projects/uploads/geocoding_extractor/geocoding-extractor.zip
+
 ## Getting Started
 
 This app is used for coordinates extraction from Excel documents containing the directions of locations. It uses Google Geocoding API for getting information from. It processes the information containing coordinates and saves it in Excel format.
